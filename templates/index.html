@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Disease Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* 🔥 NEW NOTE STYLE */
+        .note {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f1f8e9;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .disease {
+            font-weight: 600;
+            color: #c62828;
+        }
+
+        .treatment {
+            margin-top: 10px;
+            color: #2e7d32;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>🌿 Crop Disease Detection</h1>
+
+        <p class="subtitle">
+            Supports: Apple, Blueberry, Cherry, Corn, Grape, Orange, Peach, Pepper, Potato, Raspberry, Soybean, Squash, Strawberry, Tomato
+        </p>
+
+        <!-- 🔥 NEW NOTE -->
+        <p class="note">
+            ⚠️ Note: This system supports only plant leaf images. Uploading other images may result in incorrect or irrelevant predictions.
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br>
+            <button type="submit">Predict Disease</button>
+        </form>
+
+        <!-- 🔥 CLEAN RESULT LOGIC -->
+        {% if disease %}
+        <div class="result">
+            <p class="disease">Disease Detected: {{ disease }}</p>
+            <p class="treatment">Suggested Treatment: {{ solution }}</p>
+        </div>
+
+        {% elif solution %}
+        <div class="result">
+            <p class="treatment">{{ solution }}</p>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            © 2026 Vishnu Reddy | AI Crop Disease Detection System
+        </div>
+
+    </div>
+</body>
+</html>
