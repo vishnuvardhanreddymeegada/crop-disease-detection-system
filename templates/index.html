@@ -35,7 +35,6 @@
             margin-bottom: 10px;
         }
 
-        /* 🔥 NEW NOTE STYLE */
         .note {
             background: #fff3cd;
             color: #856404;
@@ -64,6 +63,16 @@
             background-color: #1b5e20;
         }
 
+        .preview {
+            margin-top: 15px;
+        }
+
+        .preview img {
+            max-width: 150px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
         .result {
             margin-top: 25px;
             padding: 15px;
@@ -75,6 +84,11 @@
         .disease {
             font-weight: 600;
             color: #c62828;
+        }
+
+        .confidence {
+            font-size: 13px;
+            color: #555;
         }
 
         .treatment {
@@ -99,21 +113,26 @@
             Supports: Apple, Blueberry, Cherry, Corn, Grape, Orange, Peach, Pepper, Potato, Raspberry, Soybean, Squash, Strawberry, Tomato
         </p>
 
-        <!-- 🔥 NEW NOTE -->
         <p class="note">
             ⚠️ Note: This system supports only plant leaf images. Uploading other images may result in incorrect or irrelevant predictions.
         </p>
 
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" required>
+            <input type="file" name="file" accept="image/*" onchange="previewImage(event)" required>
             <br>
             <button type="submit">Predict Disease</button>
         </form>
 
-        <!-- 🔥 CLEAN RESULT LOGIC -->
+        <!-- IMAGE PREVIEW -->
+        <div class="preview">
+            <img id="preview" src="" style="display:none;">
+        </div>
+
+        <!-- RESULT -->
         {% if disease %}
         <div class="result">
             <p class="disease">Disease Detected: {{ disease }}</p>
+            <p class="confidence">Confidence: {{ confidence }}%</p>
             <p class="treatment">Suggested Treatment: {{ solution }}</p>
         </div>
 
@@ -128,5 +147,14 @@
         </div>
 
     </div>
+
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+            preview.style.display = "block";
+        }
+    </script>
+
 </body>
 </html>
